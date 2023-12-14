@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Link {
 	public int tpsTrajet;
-	static int capacite = 50;
+	public int capacite = 100;
 	public int capaciteResiduelle;
 	public List<Message> canal = Arrays.asList(new Message[capacite]);
 	
-	public void Link(int ca) {
+	public Link(int ca, int tps) {
 		this.capacite = ca;
+		this.tpsTrajet = tps;
+		this.capaciteResiduelle = ca;
 	}
 	
 	public void maj() {

@@ -1,36 +1,101 @@
 package paquet;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class Main {
+	public static List<Routeur> listeRouteur = Arrays.asList(new Routeur[5]);
+	public static List<Link> listeLien = Arrays.asList(new Link[9]);
+	
+	public static List<Message> RemplirListeMessages() {
+        // Création de la liste de messages
+        List<Message> listeMessages = Arrays.asList(new Message[100000]);
+
+        // Création d'un objet Random
+        Random random = new Random();
+
+        // Remplissage de la liste avec 100000 messages
+        for (int i = 0; i < 100000; i++) {
+        	// 1 = 0,1 sec, donc 3000 = 5 minutes et 600 = 1 minutes (équitablement répartie entre 1 et 5 minutes)
+            int dureeAleatoire = random.nextInt(2400) + 601;
+            int source = random.nextInt(4);
+            int destination = random.nextInt(4);
+
+            // Création d'un objet Message avec la durée aléatoire
+            Message message = new Message(i,listeRouteur.get(source-1), listeRouteur.get(destination-1), dureeAleatoire);
+
+            // Ajout du message à la liste
+            listeMessages.add(message);
+        }
+        return listeMessages;
+    }
 
 	public static void main(String[] args) {
-		link1 = new Link();
-		link2 = new Link();
-		link3 = new Link();
-		link4 = new Link();
-		link5 = new Link();
-		link6 = new Link();
-		link7 = new Link();
-		link8 = new Link();
-		link9 = new Link();
+        Random random = new Random();
 		
-		ListeLiens = [];
+		Link linkCA1_CA2 = new Link(10,10);
+		Link linkCA2_CA3 = new Link(10,10);
+		Link linkCTS1_CTS2 = new Link(1000,10);
+		Link linkCA1_CTS1 = new Link(100,10);
+		Link linkCA1_CTS2 = new Link(100,10);
+		Link linkCA2_CTS1 = new Link(100,10);
+		Link linkCA2_CTS2 = new Link(100,10);
+		Link linkCA3_CTS1 = new Link(100,10);
+		Link linkCA3_CTS2 = new Link(100,10);
 		
-		CA1 = new Routeur(,[link1,link4,link5]);
-		CA2 = new Routeur(,[link1,link2,link8,link6]);
-		CA3 = new Routeur(,[link2,link7,link9]);
-		CTS1 = new Routeur(,[link4,link6,link7,link3]);
-		CTS2 = new Routeur(,[link3,link5,link8,link9]);
+		listeLien.add(linkCA1_CA2);
+		listeLien.add(linkCA1_CTS1);
+		listeLien.add(linkCA1_CTS2);
+		listeLien.add(linkCA2_CA3);
+		listeLien.add(linkCA2_CTS1);
+		listeLien.add(linkCA2_CTS2);
+		listeLien.add(linkCA3_CTS1);
+		listeLien.add(linkCA3_CTS2);
+		listeLien.add(linkCTS1_CTS2);
+
+		Routeur CA1 = new Routeur(linkCA1_CA2,linkCA1_CTS1,linkCA1_CTS2);
+		Routeur CA2 = new Routeur(linkCA1_CA2,linkCA2_CA3,linkCA2_CTS1,linkCA2_CTS2);
+		Routeur CA3 = new Routeur(linkCA2_CA3,linkCA3_CTS1,linkCA3_CTS2);
+		Routeur CTS1 = new Routeur(linkCTS1_CTS2,linkCA1_CTS1,linkCA2_CTS1,linkCA3_CTS1);
+		Routeur CTS2 = new Routeur(linkCTS1_CTS2,linkCA1_CTS2,linkCA2_CTS2,linkCA3_CTS2);
 		
-		ListeRouteur = [];
+		listeRouteur.add(CA1);
+		listeRouteur.add(CA3);
+		listeRouteur.add(CA2);
+		listeRouteur.add(CTS1);
+		listeRouteur.add(CTS2);
 		
-		while() {
-			//génération nouveaux messages
+        List<Message> listeMessages = Arrays.asList(new Message[100000]);
+        //initialisation de la liste de 100 000 messages
+        listeMessages = RemplirListeMessages();
+		
+		int x = 1000000000;
+		int numeroMsg = 0;
+		while(x > 0) {
+			x --;
+			//Envoie des appels
+            int envoie = random.nextInt(50); //1 chance sur 50 d'envoyer un appel
+            if (envoie == 20) {
+	        	Message messageAEnvoyer = listeMessages.get(numeroMsg);
+	        	numeroMsg ++; //On passe au msg suivant
+	        	messageAEnvoyer.routSourceFinale.buffer.add(messageAEnvoyer); //On ajoute le message à envoyer dans le buffer correspondant au bon CA
+            }
+            
+            
 			//maj links
+            
+            
+            
 			//maj routeurs
+            
+            
+            
 			//compte échecs/réussites
 			
 		}
 
 	}
+	
 
 }

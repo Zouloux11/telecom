@@ -6,12 +6,17 @@ public class Message{
 	public int compteur;
 	public Routeur routDest;
 	public Routeur routSource;
-	static Routeur routDestFinale;
-	static Routeur routSourceFinale;
-	static int dureeAppel;
+	public Routeur routDestFinale;
+	public Routeur routSourceFinale;
+	public int dureeAppel;
 	
-	public void Message() {
-		
+	public Message(int ID,Routeur source,Routeur dest,int duree) {
+		this.ID = ID;
+		this.routDest = dest;
+		this.routSource = source;
+		this.routDestFinale = dest;
+		this.routSourceFinale = source;
+		this.dureeAppel = duree;
 	}
 	
 }
