@@ -23,7 +23,7 @@ public class Main {
             int destination = random.nextInt(4);
 
             // Création d'un objet Message avec la durée aléatoire
-            Message message = new Message(i,listeRouteur.get(source-1), listeRouteur.get(destination-1), dureeAleatoire);
+            Message message = new Message(i,listeRouteur.get(source), listeRouteur.get(destination), dureeAleatoire);
 
             // Ajout du message à la liste
             listeMessages.add(message);
@@ -70,13 +70,15 @@ public class Main {
         //initialisation de la liste de 100 000 messages
         listeMessages = RemplirListeMessages();
 		
-		int x = 1000000000;
+		int x = 100000000;
 		int numeroMsg = 0;
 		while(x > 0) {
+			//System.out.println(x);
 			x --;
 			//Envoie des appels
-            int envoie = random.nextInt(50); //1 chance sur 50 d'envoyer un appel
-            if (envoie == 20) {
+            int envoie = random.nextInt(500); //1 chance sur 50 d'envoyer un appel
+            if (envoie == 20 & numeroMsg < 100000) {
+    			System.out.println(numeroMsg);
 	        	Message messageAEnvoyer = listeMessages.get(numeroMsg);
 	        	numeroMsg ++; //On passe au msg suivant
 	        	messageAEnvoyer.routSourceFinale.buffer.add(messageAEnvoyer); //On ajoute le message à envoyer dans le buffer correspondant au bon CA
