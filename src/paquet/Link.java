@@ -1,13 +1,13 @@
 package paquet;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Link {
 	public int tpsTrajet;
 	public int capacite = 100;
 	public int capaciteResiduelle;
-	public List<Message> canal = Arrays.asList(new Message[capacite]);
+	public List<Message> canal = new ArrayList<Message>(capacite);
 	
 	public Link(int ca, int tps) {
 		this.capacite = ca;

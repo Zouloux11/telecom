@@ -1,11 +1,12 @@
 package paquet;
-import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+//import java.util.Random;
 
 public class Routeur {
 	final static int sizeBuffer = 10000;
-	public List<Message> buffer = Arrays.asList(new Message[sizeBuffer]);
-	public List<Link> listeLienRouteur = Arrays.asList(new Link[4]);
+	public List<Message> buffer = new ArrayList<Message>(sizeBuffer);
+	public List<Link> listeLienRouteur = new ArrayList<Link>(4);
 
 	public Routeur(Link lien1, Link lien2, Link lien3) {
 		this.listeLienRouteur.add(lien1);

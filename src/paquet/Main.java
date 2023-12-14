@@ -1,16 +1,16 @@
 package paquet;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Main {
-	public static List<Routeur> listeRouteur = Arrays.asList(new Routeur[5]);
-	public static List<Link> listeLien = Arrays.asList(new Link[9]);
+	public static List<Routeur> listeRouteur = new ArrayList<Routeur>(5);
+	public static List<Link> listeLien = new ArrayList<Link>(9);
 	
 	public static List<Message> RemplirListeMessages() {
         // Création de la liste de messages
-        List<Message> listeMessages = Arrays.asList(new Message[100000]);
+        List<Message> listeMessages = new ArrayList<Message>(100000);
 
         // Création d'un objet Random
         Random random = new Random();
@@ -66,7 +66,7 @@ public class Main {
 		listeRouteur.add(CTS1);
 		listeRouteur.add(CTS2);
 		
-        List<Message> listeMessages = Arrays.asList(new Message[100000]);
+        List<Message> listeMessages = new ArrayList<Message>(100000);
         //initialisation de la liste de 100 000 messages
         listeMessages = RemplirListeMessages();
 		
