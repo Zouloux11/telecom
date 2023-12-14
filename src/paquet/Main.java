@@ -81,7 +81,7 @@ public class Main {
     			System.out.println(numeroMsg);
 	        	Message messageAEnvoyer = listeMessages.get(numeroMsg);
 	        	numeroMsg ++; //On passe au msg suivant
-	        	messageAEnvoyer.routSourceFinale.buffer.add(messageAEnvoyer); //On ajoute le message à envoyer dans le buffer correspondant au bon CA
+	        	messageAEnvoyer.routSourceFinale.ajouter(messageAEnvoyer); //On ajoute le message à envoyer dans le buffer correspondant au bon CA
             }
             
             
