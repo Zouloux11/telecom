@@ -25,7 +25,7 @@ public class Routeur {
 		this.nbDeLien = 4;
 	}
 
-	public int maj(int nbAppelsBloques){
+	public int maj(){
 		return 0;
 	}
 	public void ajouter(Message messageAEnvoyer) {

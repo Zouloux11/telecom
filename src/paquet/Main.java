@@ -8,7 +8,7 @@ import java.util.Random;
 public class Main {
 	public static List<Routeur> listeRouteur = new ArrayList<Routeur>(5);
 	public static List<Link> listeLien = new ArrayList<Link>(9);
-	public static int nbAppelsBloques;
+	public static int nbAppelsBloques = 0;
 	public static List<Message> RemplirListeMessages() {
 		// Création de la liste de messages
 		List<Message> listeMessages = new ArrayList<Message>(100000);
@@ -84,14 +84,14 @@ public class Main {
 		//initialisation de la liste de 100 000 messages
 		listeMessages = RemplirListeMessages();
 
-		int x = 1000000;
+		int x = 2000000;
 		int numeroMsg = 0;
 		while(x > 0) {
 			//System.out.println(x);
 			x --;
 			//Envoie des appels
 			int envoie = random.nextInt(5); //1 chance sur 50 d'envoyer un appel
-			if (envoie == 2 & numeroMsg < 100000) {
+			if (envoie == 2 && numeroMsg < 100000) {
 				System.out.println(numeroMsg);
 				Message messageAEnvoyer = listeMessages.get(numeroMsg);
 				numeroMsg ++; //On passe au msg suivant
@@ -104,15 +104,20 @@ public class Main {
 
 			// Parcourir les routeurs
 			for (Routeur routeur : listeRouteur) {
-				int jeSuisFrauduleux = routeur.maj(nbAppelsBloques);
+				int jeSuisFrauduleux = routeur.maj();
+				if (jeSuisFrauduleux < 0) {
+					nbAppelsBloques ++;
+				}
 					supprimerOuAppeler(listeLien,-jeSuisFrauduleux);
 			}
 
-			System.out.println("Voici le nombre d'appels bloqués : " + nbAppelsBloques);
+
 
 		}
+		System.out.println("Voici le nombre d'appels bloqués : " + nbAppelsBloques);
 
 	}
+	
 	public static void supprimerOuAppeler(List<Link> listeLien,int id) {
 		for (int i = 0; i<9; i++) {
 			Iterator<Message> iterator = listeLien.get(i).canal.iterator();

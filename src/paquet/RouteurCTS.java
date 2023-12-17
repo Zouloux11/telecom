@@ -8,7 +8,7 @@ public class RouteurCTS extends Routeur {
 	public RouteurCTS(Link lien1, Link lien2, Link lien3,Link lien4) {
 		super(lien1,lien2,lien3,lien4);	
 	}
-	public int maj(int nbAppelsBloques){
+	public int maj(){
 		//On envoie le premier message de la liste dans le bon lien et on initialise le compteur à link.tpsTrajet
 		//lors de lajout dans un lien, il faut diminuer de 1 la capacité résiduelle de ce meme lien
 		// et changer les sources/destinations temporaire
@@ -32,7 +32,6 @@ public class RouteurCTS extends Routeur {
 				else {
 
 					System.out.println("ça bloque en CTS");
-					nbAppelsBloques ++;
 					return -premierMessage.ID;
 					//					boolean messageTrouved = false;
 					//					int i = 0;
