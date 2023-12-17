@@ -112,11 +112,6 @@ public class Main {
 				}
 			}
 		}
-//		for (Link lien : listeLien) {
-//			for (int i = lien.canal.size() - 1; i >= 0; i--) {
-//				System.out.println(lien.canal.get(i).etat);
-//			}
-//		}
 
 		System.out.println("Voici le nombre d'appels bloqués : " + nbAppelsBloques);
 
