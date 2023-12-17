@@ -30,8 +30,8 @@ public class RouteurCTS extends Routeur {
 				}
 				//Sinon il y a un échec et on renvoie d'où ça vient en état 2
 				else {
-
 					System.out.println("ça bloque en CTS");
+					System.out.println(-premierMessage.ID);
 					return -premierMessage.ID;
 					//					boolean messageTrouved = false;
 					//					int i = 0;
