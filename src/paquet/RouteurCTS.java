@@ -8,7 +8,7 @@ public class RouteurCTS extends Routeur {
 	public RouteurCTS(String nom,Link lien1, Link lien2, Link lien3,Link lien4) {
 		super(nom,lien1,lien2,lien3,lien4);	
 	}
-	public int maj(){
+	public boolean maj(){
 		//On envoie le premier message de la liste dans le bon lien et on initialise le compteur à link.tpsTrajet
 		//lors de lajout dans un lien, il faut diminuer de 1 la capacité résiduelle de ce meme lien
 		// et changer les sources/destinations temporaire
@@ -22,7 +22,7 @@ public class RouteurCTS extends Routeur {
 				while(listeLienRouteur.get(j).sortie1 != premierMessage.routDestFinale && listeLienRouteur.get(j).sortie2 != premierMessage.routDestFinale) {
 					j++;
 				}
-		        System.out.println("Link choisis : " + listeLienRouteur.get(j).nom + "|| dest finale : " + premierMessage.routDestFinale.nom +  "|| source finale : " + premierMessage.routSourceFinale.nom);
+				System.out.println("Link choisis : " + listeLienRouteur.get(j).nom + "|| dest finale : " + premierMessage.routDestFinale.nom +  "|| source finale : " + premierMessage.routSourceFinale.nom);
 				premierMessage.routDest = premierMessage.routDestFinale;
 				//Si il y a de la place dans ce lien on le met
 				if (listeLienRouteur.get(j).canal.size() < listeLienRouteur.get(j).capacite) {
@@ -34,29 +34,29 @@ public class RouteurCTS extends Routeur {
 				else {
 					System.out.println("ça bloque en CTS");
 					System.out.println(-premierMessage.ID);
-					return -premierMessage.ID;
-					//					boolean messageTrouved = false;
-					//					int i = 0;
-					//					while (messageTrouved == false) {
-					//						System.out.println("i vaut : " + i);
-					//						messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(2,premierMessage.ID);
-					//						System.out.println("trouved vaut : " + messageTrouved);
-					//						i ++;
-					//					}
+					boolean messageTrouved = false;
+					int i = 0;
+					while (messageTrouved == false) {
+						System.out.println("i vaut : " + i);
+						messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(2,premierMessage.ID);
+						System.out.println("trouved vaut : " + messageTrouved);
+						i ++;
+					}
+					return false;
 				}
 			}
-			//			else {
-			//				boolean messageTrouved = false;
-			//				int i = 0;
-			//				while (messageTrouved == false) {
-			//					System.out.println("i vaut : " + i);
-			//					messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(premierMessage.etat,premierMessage.ID);
-			//					System.out.println("trouved vaut : " + messageTrouved);
-			//					i ++;
-			//				}
-			//			}
+			else {
+				boolean messageTrouved = false;
+				int i = 0;
+				while (messageTrouved == false) {
+					System.out.println("i vaut : " + i);
+					messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(premierMessage.etat,premierMessage.ID);
+					System.out.println("trouved vaut : " + messageTrouved);
+					i ++;
+				}
+			}
 		}
-		return 0;
+		return true;
 	}
 
 

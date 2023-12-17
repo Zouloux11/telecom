@@ -102,12 +102,9 @@ public class Main {
 
 			// Parcourir les routeurs
 			for (Routeur routeur : listeRouteur) {
-				int jeSuisFrauduleux = routeur.maj();
-				if (jeSuisFrauduleux < 0) {
+				boolean jeSuisFrauduleux = routeur.maj();
+				if (jeSuisFrauduleux) {
 					nbAppelsBloques ++;
-				}
-				if (jeSuisFrauduleux != 0) {
-					supprimerOuAppeler(listeLien,jeSuisFrauduleux);
 				}
 			}
 		}

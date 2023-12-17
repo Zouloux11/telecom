@@ -28,8 +28,8 @@ public class Routeur {
 		this.nom = nom;
 	}
 
-	public int maj(){
-		return 0;
+	public boolean maj(){
+		return true;
 	}
 	public void ajouter(Message messageAEnvoyer) {
 		buffer.offer(messageAEnvoyer);
