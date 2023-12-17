@@ -21,7 +21,10 @@ public class Main {
             int dureeAleatoire = random.nextInt(2400) + 601;
             int source = random.nextInt(4);
             int destination = random.nextInt(4);
-
+            while (source == destination) {
+                source = random.nextInt(4);
+                destination = random.nextInt(4);
+            }
             // Création d'un objet Message avec la durée aléatoire
             Message message = new Message(i,listeRouteur.get(source), listeRouteur.get(destination), dureeAleatoire);
 
@@ -34,15 +37,15 @@ public class Main {
 	public static void main(String[] args) {
         Random random = new Random();
 		
-		Link linkCA1_CA2 = new Link(10,10);
-		Link linkCA2_CA3 = new Link(10,10);
-		Link linkCTS1_CTS2 = new Link(1000,10);
-		Link linkCA1_CTS1 = new Link(100,10);
-		Link linkCA1_CTS2 = new Link(100,10);
-		Link linkCA2_CTS1 = new Link(100,10);
-		Link linkCA2_CTS2 = new Link(100,10);
-		Link linkCA3_CTS1 = new Link(100,10);
-		Link linkCA3_CTS2 = new Link(100,10);
+		Link linkCA1_CA2 = new Link(10,10,1);
+		Link linkCA2_CA3 = new Link(10,10,1);
+		Link linkCTS1_CTS2 = new Link(1000,10,3);
+		Link linkCA1_CTS1 = new Link(100,10,2);
+		Link linkCA1_CTS2 = new Link(100,10,2);
+		Link linkCA2_CTS1 = new Link(100,10,2);
+		Link linkCA2_CTS2 = new Link(100,10,2);
+		Link linkCA3_CTS1 = new Link(100,10,2);
+		Link linkCA3_CTS2 = new Link(100,10,2);
 		
 		listeLien.add(linkCA1_CA2);
 		listeLien.add(linkCA1_CTS1);
@@ -65,6 +68,16 @@ public class Main {
 		listeRouteur.add(CA2);
 		listeRouteur.add(CTS1);
 		listeRouteur.add(CTS2);
+		
+		linkCA1_CA2.Associer(CA1, CA2);
+		linkCA2_CA3.Associer(CA2, CA3);
+		linkCTS1_CTS2.Associer(CTS1, CTS2);
+		linkCA1_CTS1.Associer(CA1, CTS1);
+		linkCA1_CTS2.Associer(CA1, CTS2);
+		linkCA2_CTS1.Associer(CA2, CTS1);
+		linkCA2_CTS2.Associer(CA2, CTS2);
+		linkCA3_CTS1.Associer(CA3, CTS1);
+		linkCA3_CTS2.Associer(CA3, CTS2);
 		
         List<Message> listeMessages = new ArrayList<Message>(100000);
         //initialisation de la liste de 100 000 messages
