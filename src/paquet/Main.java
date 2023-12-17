@@ -40,12 +40,12 @@ public class Main {
 		Link linkCA1_CA2 = new Link("linkCA1_CA2",10,10,1);
 		Link linkCA2_CA3 = new Link("linkCA2_CA3",10,10,1);
 		Link linkCTS1_CTS2 = new Link("linkCTS1_CTS2",1000,10,3);
-		Link linkCA1_CTS1 = new Link("linkCA1_CTS1",20,10,2);
-		Link linkCA1_CTS2 = new Link("linkCA1_CTS2",20,10,2);
-		Link linkCA2_CTS1 = new Link("linkCA2_CTS1",20,10,2);
-		Link linkCA2_CTS2 = new Link("linkCA2_CTS2",20,10,2);
-		Link linkCA3_CTS1 = new Link("linkCA3_CTS1",20,10,2);
-		Link linkCA3_CTS2 = new Link("linkCA3_CTS2",20,10,2);
+		Link linkCA1_CTS1 = new Link("linkCA1_CTS1",100,10,2);
+		Link linkCA1_CTS2 = new Link("linkCA1_CTS2",100,10,2);
+		Link linkCA2_CTS1 = new Link("linkCA2_CTS1",100,10,2);
+		Link linkCA2_CTS2 = new Link("linkCA2_CTS2",100,10,2);
+		Link linkCA3_CTS1 = new Link("linkCA3_CTS1",100,10,2);
+		Link linkCA3_CTS2 = new Link("linkCA3_CTS2",100,10,2);
 
 		listeLien.add(linkCA1_CA2);
 		listeLien.add(linkCA1_CTS1);
@@ -89,9 +89,8 @@ public class Main {
 			//System.out.println(x);
 			x --;
 			//Envoie des appels
-			int envoie = random.nextInt(5); //1 chance sur 50 d'envoyer un appel
-			if (envoie == 2 && numeroMsg < 1000000) {
-				//System.out.println(numeroMsg);
+			int envoie = random.nextInt(1); //1 chance sur 1 d'envoyer un appel
+			if (envoie == 0 && numeroMsg < 1000000) {
 				Message messageAEnvoyer = listeMessages.get(numeroMsg);
 				numeroMsg ++; //On passe au msg suivant
 				messageAEnvoyer.routSourceFinale.ajouter(messageAEnvoyer); //On ajoute le message à envoyer dans le buffer correspondant au bon CA
@@ -112,12 +111,6 @@ public class Main {
 				}
 			}
 		}
-//		for (Link lien : listeLien) {
-//			for (int i = lien.canal.size() - 1; i >= 0; i--) {
-//				System.out.println(lien.canal.get(i).etat);
-//			}
-//		}
-
 		System.out.println("Voici le nombre d'appels bloqués : " + nbAppelsBloques);
 
 	}
