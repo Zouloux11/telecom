@@ -16,14 +16,14 @@ public class Main {
 		Random random = new Random();
 
 		// Remplissage de la liste avec 100000 messages
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1000000; i++) {
 			// 1 = 0,1 sec, donc 3000 = 5 minutes et 600 = 1 minutes (équitablement répartie entre 1 et 5 minutes)
 			int dureeAleatoire = random.nextInt(2400) + 601;
-			int source = random.nextInt(4);
-			int destination = random.nextInt(4);
+			int source = random.nextInt(3);
+			int destination = random.nextInt(3);
 			while (source == destination) {
-				source = random.nextInt(2);
-				destination = random.nextInt(2);
+				source = random.nextInt(3);
+				destination = random.nextInt(3);
 			}
 			// Création d'un objet Message avec la durée aléatoire
 			Message message = new Message(i+1,listeRouteur.get(source), listeRouteur.get(destination), dureeAleatoire);
@@ -37,15 +37,15 @@ public class Main {
 	public static void main(String[] args) {
 		Random random = new Random();
 
-		Link linkCA1_CA2 = new Link(10,10,1);
-		Link linkCA2_CA3 = new Link(10,10,1);
-		Link linkCTS1_CTS2 = new Link(1000,10,3);
-		Link linkCA1_CTS1 = new Link(100,10,2);
-		Link linkCA1_CTS2 = new Link(100,10,2);
-		Link linkCA2_CTS1 = new Link(100,10,2);
-		Link linkCA2_CTS2 = new Link(100,10,2);
-		Link linkCA3_CTS1 = new Link(100,10,2);
-		Link linkCA3_CTS2 = new Link(100,10,2);
+		Link linkCA1_CA2 = new Link("linkCA1_CA2",10,10,1);
+		Link linkCA2_CA3 = new Link("linkCA2_CA3",10,10,1);
+		Link linkCTS1_CTS2 = new Link("linkCTS1_CTS2",1000,10,3);
+		Link linkCA1_CTS1 = new Link("linkCA1_CTS1",20,10,2);
+		Link linkCA1_CTS2 = new Link("linkCA1_CTS2",20,10,2);
+		Link linkCA2_CTS1 = new Link("linkCA2_CTS1",20,10,2);
+		Link linkCA2_CTS2 = new Link("linkCA2_CTS2",20,10,2);
+		Link linkCA3_CTS1 = new Link("linkCA3_CTS1",20,10,2);
+		Link linkCA3_CTS2 = new Link("linkCA3_CTS2",20,10,2);
 
 		listeLien.add(linkCA1_CA2);
 		listeLien.add(linkCA1_CTS1);
@@ -57,11 +57,11 @@ public class Main {
 		listeLien.add(linkCA3_CTS2);
 		listeLien.add(linkCTS1_CTS2);
 
-		Routeur CA1 = new RouteurCA(linkCA1_CA2,linkCA1_CTS1,linkCA1_CTS2);
-		Routeur CA2 = new RouteurCA(linkCA1_CA2,linkCA2_CA3,linkCA2_CTS1,linkCA2_CTS2);
-		Routeur CA3 = new RouteurCA(linkCA2_CA3,linkCA3_CTS1,linkCA3_CTS2);
-		Routeur CTS1 = new RouteurCTS(linkCTS1_CTS2,linkCA1_CTS1,linkCA2_CTS1,linkCA3_CTS1);
-		Routeur CTS2 = new RouteurCTS(linkCTS1_CTS2,linkCA1_CTS2,linkCA2_CTS2,linkCA3_CTS2);
+		Routeur CA1 = new RouteurCA("CA1",linkCA1_CA2,linkCA1_CTS1,linkCA1_CTS2);
+		Routeur CA2 = new RouteurCA("CA2",linkCA1_CA2,linkCA2_CA3,linkCA2_CTS1,linkCA2_CTS2);
+		Routeur CA3 = new RouteurCA("CA3",linkCA2_CA3,linkCA3_CTS1,linkCA3_CTS2);
+		Routeur CTS1 = new RouteurCTS("CTS1",linkCTS1_CTS2,linkCA1_CTS1,linkCA2_CTS1,linkCA3_CTS1);
+		Routeur CTS2 = new RouteurCTS("CTS2",linkCTS1_CTS2,linkCA1_CTS2,linkCA2_CTS2,linkCA3_CTS2);
 
 		listeRouteur.add(CA1);
 		listeRouteur.add(CA3);
@@ -79,18 +79,18 @@ public class Main {
 		linkCA3_CTS1.Associer(CA3, CTS1);
 		linkCA3_CTS2.Associer(CA3, CTS2);
 
-		List<Message> listeMessages = new ArrayList<Message>(100000);
+		List<Message> listeMessages = new ArrayList<Message>(1000000);
 		//initialisation de la liste de 100 000 messages
 		listeMessages = RemplirListeMessages();
 
-		int x = 20000;
+		int x = 25000000;
 		int numeroMsg = 0;
 		while(x > 0) {
 			//System.out.println(x);
 			x --;
 			//Envoie des appels
 			int envoie = random.nextInt(5); //1 chance sur 50 d'envoyer un appel
-			if (envoie == 2 && numeroMsg < 1000) {
+			if (envoie == 2 && numeroMsg < 1000000) {
 				//System.out.println(numeroMsg);
 				Message messageAEnvoyer = listeMessages.get(numeroMsg);
 				numeroMsg ++; //On passe au msg suivant
@@ -98,7 +98,6 @@ public class Main {
 			}
 			// Parcourir les liens
 			for (Link lien : listeLien) {
-
 				lien.maj();
 			}
 
@@ -127,9 +126,9 @@ public class Main {
 		for (Link lien : listeLien) {
 			for (int i = lien.canal.size() - 1; i >= 0; i--) {
 				Message message = lien.canal.get(i);
-				if (id < 0) {
-					System.out.println(id +"   GNE   " + message.ID);
-				}
+//				if (id < 0) {
+//					System.out.println(-id +"   GNE   " + message.ID);
+//				}
 				if (message.ID == -id) {
 					System.out.println("fdpBLOQUED==========================================");
 					lien.canal.remove(i); // Supprimer le message avec l'ID spécifié

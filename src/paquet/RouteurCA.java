@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class RouteurCA extends Routeur {
 
-	public RouteurCA(Link lien1, Link lien2, Link lien3) {
-		super(lien1,lien2,lien3);	
+	public RouteurCA(String nom,Link lien1, Link lien2, Link lien3) {
+		super(nom,lien1,lien2,lien3);	
 	}
-	public RouteurCA(Link lien1, Link lien2, Link lien3,Link lien4) {
-		super(lien1,lien2,lien3,lien4);	
+	public RouteurCA(String nom, Link lien1, Link lien2, Link lien3,Link lien4) {
+		super(nom,lien1,lien2,lien3,lien4);	
 	}
 	public int maj(){
 		//On envoie le premier message de la liste dans le bon lien et on initialise le compteur à link.tpsTrajet

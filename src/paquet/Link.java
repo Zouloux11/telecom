@@ -3,6 +3,7 @@ package paquet;
 import java.util.List;
 import java.util.ArrayList;
 public class Link {
+	public String nom;
 	public int tpsTrajet;
 	public int capacite = 100;
 	public int capaciteResiduelle;
@@ -11,11 +12,12 @@ public class Link {
 	public Routeur sortie1;
 	public Routeur sortie2;
 
-	public Link(int ca, int tps, int type) {
+	public Link(String nom,int ca, int tps, int type) {
 		this.capacite = ca;
 		this.tpsTrajet = tps;
 		this.capaciteResiduelle = ca;
 		this.typeDeLien = type;
+		this.nom = nom;
 	}
 
 	public void Associer(Routeur un, Routeur deux) {
