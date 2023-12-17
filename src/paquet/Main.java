@@ -103,7 +103,7 @@ public class Main {
 			// Parcourir les routeurs
 			for (Routeur routeur : listeRouteur) {
 				boolean jeSuisFrauduleux = routeur.maj();
-				if (jeSuisFrauduleux) {
+				if (!jeSuisFrauduleux) {
 					nbAppelsBloques ++;
 				}
 			}

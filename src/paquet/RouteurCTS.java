@@ -36,7 +36,7 @@ public class RouteurCTS extends Routeur {
 					System.out.println(-premierMessage.ID);
 					boolean messageTrouved = false;
 					int i = 0;
-					while (messageTrouved == false) {
+					while (messageTrouved == false && i < nbDeLien) {
 						System.out.println("i vaut : " + i);
 						messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(2,premierMessage.ID);
 						System.out.println("trouved vaut : " + messageTrouved);
@@ -48,7 +48,7 @@ public class RouteurCTS extends Routeur {
 			else {
 				boolean messageTrouved = false;
 				int i = 0;
-				while (messageTrouved == false) {
+				while (messageTrouved == false && i < nbDeLien) {
 					System.out.println("i vaut : " + i);
 					messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(premierMessage.etat,premierMessage.ID);
 					System.out.println("trouved vaut : " + messageTrouved);

@@ -42,7 +42,7 @@ public class RouteurCA extends Routeur {
 						System.out.println("ça bloque en CA");
 						boolean messageTrouved = false;
 						int i = 0;
-						while (messageTrouved == false || i > this.nbDeLien) {
+						while (messageTrouved == false && i < this.nbDeLien) {
 							System.out.println("i vaut : " + i);
 							messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(2,premierMessage.ID);
 							i ++;
@@ -63,7 +63,7 @@ public class RouteurCA extends Routeur {
 			else {
 				boolean messageTrouved = false;
 				int i = 0;
-				while (messageTrouved == false || i < this.nbDeLien) {
+				while (messageTrouved == false && i < this.nbDeLien) {
 					i ++;
 					System.out.println("i vaut : " + i);
 					messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(premierMessage.etat,premierMessage.ID);
