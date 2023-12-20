@@ -8,6 +8,8 @@ public class Main {
 	public static List<Routeur> listeRouteur = new ArrayList<Routeur>(5);
 	public static List<Link> listeLien = new ArrayList<Link>(9);
 	public static int nbAppelsBloques = 0;
+	private static List<Integer> listeIDbloqued = new ArrayList<>();
+			  
 	public static List<Message> RemplirListeMessages() {
 		// Création de la liste de messages
 		List<Message> listeMessages = new ArrayList<Message>(100000);
@@ -16,7 +18,7 @@ public class Main {
 		Random random = new Random();
 
 		// Remplissage de la liste avec 100000 messages
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			// 1 = 0,1 sec, donc 3000 = 5 minutes et 600 = 1 minutes (équitablement répartie entre 1 et 5 minutes)
 			int dureeAleatoire = random.nextInt(2400) + 601;
 			int source = random.nextInt(3);
@@ -83,14 +85,14 @@ public class Main {
 		//initialisation de la liste de 100 000 messages
 		listeMessages = RemplirListeMessages();
 
-		int x = 25000000;
+		int x = 2000000;
 		int numeroMsg = 0;
 		while(x > 0) {
 			//System.out.println(x);
 			x --;
 			//Envoie des appels
 			int envoie = random.nextInt(1); //1 chance sur 1 d'envoyer un appel
-			if (envoie == 0 && numeroMsg < 1000000) {
+			if (envoie == 0 && numeroMsg < 100000) {
 				Message messageAEnvoyer = listeMessages.get(numeroMsg);
 				numeroMsg ++; //On passe au msg suivant
 				messageAEnvoyer.routSourceFinale.ajouter(messageAEnvoyer); //On ajoute le message à envoyer dans le buffer correspondant au bon CA
@@ -102,36 +104,14 @@ public class Main {
 
 			// Parcourir les routeurs
 			for (Routeur routeur : listeRouteur) {
-				boolean jeSuisFrauduleux = routeur.maj();
-				if (!jeSuisFrauduleux) {
-					nbAppelsBloques ++;
-				}
+				int IDbloqued = routeur.maj();
+		        if (!listeIDbloqued.contains(IDbloqued)) {
+		            listeIDbloqued.add(IDbloqued);
+		            nbAppelsBloques++;
+		        }
 			}
 		}
 		System.out.println("Voici le nombre d'appels bloqués : " + nbAppelsBloques);
 
 	}
-
-	public static void supprimerOuAppeler(List<Link> listeLien, int id) {
-		for (Link lien : listeLien) {
-			for (int i = lien.canal.size() - 1; i >= 0; i--) {
-				Message message = lien.canal.get(i);
-//				if (id < 0) {
-//					System.out.println(-id +"   GNE   " + message.ID);
-//				}
-				if (message.ID == -id) {
-					System.out.println("fdpBLOQUED==========================================");
-					lien.canal.remove(i); // Supprimer le message avec l'ID spécifié
-				}
-				if (message.ID == id) {
-					System.out.println("fdpAPPEL============================================");
-					message.etat = 1;
-					message.compteur = message.dureeAppel;
-				}
-			}
-		}
-	}
-
-
-
 }

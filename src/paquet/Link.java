@@ -40,7 +40,7 @@ public class Link {
 	                case 0:
 	                    // État 0 : Mettez le compteur à -1 et ajoutez le message au buffer du routeur destination
 	                    message.compteur = -1;
-	                    message.routDest.buffer.add(message);
+	                    message.routDest.buffer.add(new Message(message.ID,message.routSourceFinale, message.routDestFinale, message.dureeAppel));
 	                    break;
 
 	                case 1:
@@ -52,13 +52,13 @@ public class Link {
 	                case 2:
 	                    // État 2 : Supprimez le message et ajoutez-le au buffer du routeur destination
 	                    canal.remove(i);
-	                    message.routDest.buffer.add(message);
+	                    message.routDest.buffer.add(new Message(message.ID,message.routSourceFinale, message.routDestFinale, message.dureeAppel));
 	                    break;
 
 	                case 3:
 	                    // État 3 : Passez à l'état 1, ajoutez le message au buffer du routeur destination et mettre le compteur à la durée de l'appel
 	                    message.etat = 1;
-	                    message.routDest.buffer.add(message);
+	                    message.routDest.buffer.add(new Message(message.ID,message.routSourceFinale, message.routDestFinale, message.dureeAppel));
 	                    message.compteur = message.dureeAppel;
 	                    break;
 	            }

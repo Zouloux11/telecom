@@ -8,7 +8,7 @@ public class RouteurCTS extends Routeur {
 	public RouteurCTS(String nom,Link lien1, Link lien2, Link lien3,Link lien4) {
 		super(nom,lien1,lien2,lien3,lien4);	
 	}
-	public boolean maj(){
+	public int maj(){
 		//On envoie le premier message de la liste dans le bon lien et on initialise le compteur à link.tpsTrajet
 		//lors de lajout dans un lien, il faut diminuer de 1 la capacité résiduelle de ce meme lien
 		// et changer les sources/destinations temporaire
@@ -42,7 +42,6 @@ public class RouteurCTS extends Routeur {
 						System.out.println("trouved vaut : " + messageTrouved);
 						i ++;
 					}
-					return false;
 				}
 			}
 			else {
@@ -56,7 +55,7 @@ public class RouteurCTS extends Routeur {
 				}
 			}
 		}
-		return true;
+		return -1;
 	}
 
 

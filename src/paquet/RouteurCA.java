@@ -10,7 +10,7 @@ public class RouteurCA extends Routeur {
 	public RouteurCA(String nom, Link lien1, Link lien2, Link lien3,Link lien4) {
 		super(nom,lien1,lien2,lien3,lien4);	
 	}
-	public boolean maj(){
+	public int maj(){
 		//On envoie le premier message de la liste dans le bon lien et on initialise le compteur à link.tpsTrajet
 		//lors de lajout dans un lien, il faut diminuer de 1 la capacité résiduelle de ce meme lien
 		// et changer les sources/destinations temporaire
@@ -47,17 +47,19 @@ public class RouteurCA extends Routeur {
 							messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(2,premierMessage.ID);
 							i ++;
 						}
-						return false;
 					}
 				}
 				else {
 					System.out.println("L'appel passe UwU");
+					System.out.println("Routeur actuel : "+ this.nom + "|| dest finale : " + premierMessage.routDestFinale.nom +  "|| source finale : " + premierMessage.routSourceFinale.nom);
 					boolean messageTrouved = false;
 					int i = 0;
-					while (messageTrouved == false) {
+					//PAS LOGIQUE A SUPPR
+					while (messageTrouved == false && i < nbDeLien) {
 						messageTrouved = listeLienRouteur.get(i).chercherMessageEtMAJSonEtat(3,premierMessage.ID);
 						i ++;
 					}
+					return premierMessage.ID;
 				}
 			}
 			else {
@@ -70,7 +72,7 @@ public class RouteurCA extends Routeur {
 				}
 			}
 		}
-		return true;
+		return -1;
 	}
 }
 
