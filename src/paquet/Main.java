@@ -20,7 +20,7 @@ public class Main {
 		// Remplissage de la liste avec 100000 messages
 		for (int i = 0; i < 100000; i++) {
 			// 1 = 0,1 sec, donc 3000 = 5 minutes et 600 = 1 minutes (équitablement répartie entre 1 et 5 minutes)
-			int dureeAleatoire = random.nextInt(2400) + 601;
+			int dureeAleatoire = random.nextInt(24) + 6;
 			int source = random.nextInt(3);
 			int destination = random.nextInt(3);
 			while (source == destination) {
@@ -111,7 +111,7 @@ public class Main {
 		        }
 			}
 		}
-		System.out.println("Voici le nombre d'appels bloqués : " + nbAppelsBloques);
+		System.out.println("Voici le nombre d'appels qui passe : " + nbAppelsBloques);
 
 	}
 }
